@@ -15,8 +15,8 @@ export const Layout = ({children}) => {
                 margin: '0 auto',
                 width: '64 em'
             }}>
-                <textarea ref={textareaRef}></textarea>
-                <input type='button' value={'Get text'} onClick={() => {console.log('ref', textareaRef.current.value)}}/>   
+                {/* <textarea ref={textareaRef}></textarea>
+                <input type='button' value={'Get text'} onClick={() => {console.log('ref', textareaRef.current.value)}}/>    */}
                 {children}
             </div>
             <Footer />

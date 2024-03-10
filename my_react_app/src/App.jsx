@@ -3,6 +3,8 @@ import './App.css';
 import { Layout } from './components/Layout/Layout';
 import { useState } from 'react';
 
+import { Routes, Route } from 'react-router-dom';
+
 function App() {
 
   const [posts, setPosts] = useState([])
@@ -13,18 +15,30 @@ function App() {
 
   return (
     <Layout>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px'
-      }}>
-        {posts.map((post, index) => <PostComponent postData={post} />)}
-      </div>
+      <Routes>
+        <Route path='/:id' element={<HomeComponent posts={posts}/>} />
+        <Route path='/info' element={<>info</>} />
+        <Route path='/user' element={<>user</>} />
+      </Routes>
     </Layout>
   );
 }
 
 export default App;
+
+const HomeComponent = ({posts}) => {
+  
+
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '8px'
+    }}>
+      {posts.map((post, index) => <PostComponent postData={post} />)}
+    </div>
+  )
+}
 
 const PostComponent = ({postData}) => {
   return (
