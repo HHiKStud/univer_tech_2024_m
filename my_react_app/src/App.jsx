@@ -1,6 +1,5 @@
-// import logo from './logo.svg';
 import './App.css';
-import { Layout } from './components/Layout/Layout';
+import { PageLayout } from './components/Layout/Layout';
 import { useEffect, useState } from 'react';
 
 import { Routes, Route, useParams, useLocation, Navigate } from 'react-router-dom';
@@ -22,14 +21,13 @@ function App() {
   const user = {
     name: 'Ivan',
     age: '28',
-    role: 'user'
+    role: 'admin'
   }
   const isAdmin = (element) => (user.role == 'admin' ? element : <Navigate to={'/error/'}/>)
 
   return (
-    // <Layout>
       <Routes>
-        <Route path='/*' element={isAdmin(<Layout/>)}>
+        <Route path='/*' element={isAdmin(<PageLayout/>)}>
           <Route index element={<HomeComponent posts={posts}/>} />
           <Route path='info' element={<InfoPage/>} />
           <Route path='user' element={<>user</>} />
@@ -37,29 +35,24 @@ function App() {
         </Route>
       
         <Route path='/auth/'>
-          <Route index element={<HomeComponent posts={posts}/>} />
-          <Route path='login' element={<InfoPage/>} />
-          <Route path='resetpassword' element={<>user</>} />
+          <Route index element={<>Nothing here yet.</>} />
+          <Route path='login' element={<>Login is not supported yet</>} />
+          <Route path='signup' element={<>Signup is not supported yet</>} />
+          <Route path='resetpassword' element={<>You don't have a passwoord yet :D</>} />
         </Route>
 
         <Route path='/error/'>
           <Route index element={<>Вы не админ.</>} />
         </Route>
       </Routes>
-    // </Layout>
   );
 }
 
 export default App;
 
 const HomeComponent = ({posts}) => {
-  // const params = useParams()
-  // const location = useLocation()
-
-  // console.log('Parametres: ', params)
-  // console.log('State:', location.state)
   return (
-    <div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
+    <div style={{display: 'flex', flexDirection: 'column', gap: '8px', width: '64em', margin: '0 auto', marginTop: '15px'}}>
       {posts.map((post, index) => <PostComponent postData={post} />)}
     </div>
   )
@@ -80,15 +73,9 @@ const PostComponent = ({postData}) => {
 }
 
 const InfoPage = () => {
-  
-  // const location = useLocation()
-
-  // console.log('info:loc:', location)
-  
-  // const { msg } = location.state
   return(
     <>
-      info: ''
+      No information yet.
     </>
   )
 }
