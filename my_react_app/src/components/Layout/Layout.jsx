@@ -5,7 +5,7 @@ import { Footer } from "../Footer/Footer"
 import './Layout.css'
 
 export const Layout = ({children}) => {
-    const textareaRef = useRef()
+    // const textareaRef = useRef()
     
     return (
         <div className="layout_container">
