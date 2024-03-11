@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Header = () => {
@@ -13,7 +13,8 @@ export const Header = () => {
     return (
         <div style = {{ border: '1px solid #333', height: '40px', position: 'fixed', width: '100%', background: '#fff'}}>
             <div style={{display: 'flex', flexDirection: 'row', gap: '20px'}}>
-                <div><Link to={`/${id}/${uuid}`}>Home</Link></div>
+                
+                <div onClick={() => navigate('/')}>Home</div>
                 <div onClick={() => navigate('/info', { state: { msg: 'Yay!' } })}>Info</div>
                 <div onClick={() => navigate('/user')}>User</div>
                 {/* <div onClick={() => handleNavigate()}>User</div> */}
