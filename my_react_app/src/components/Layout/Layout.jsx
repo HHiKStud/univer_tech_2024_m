@@ -6,7 +6,7 @@ import { Layout, Menu } from 'antd'
 // import { Header } from "../Header/Header"
 // import { Footer } from "../Footer/Footer"
 
-import './Layout.css'
+
 
 export const PageLayout = ({children}) => {
     // const textareaRef = useRef()
