@@ -5,22 +5,26 @@ import { useEffect, useState } from 'react';
 import { Routes, Route, useParams, useLocation, Navigate } from 'react-router-dom';
 
 function App() {
-  const [posts, setPosts] = useState([])
+  const [ data, setData ] = useState([]);
+
+  const getData = type => fetch(`https://jsonplaceholder.typicode.com/${type}`).then(res => res.json());
 
   useEffect(() => {
-    getPosts()
-  }, [])
-
-  const getPosts = () => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(res => res.json())
-    .then(res => setPosts(res))
-  }
+    Promise
+      .all([ 'posts', 'users' ].map(getData))
+      .then(([ posts, users ]) => {
+        const usersObj = Object.fromEntries(users.map(n => [ n.id, n ]));
+        setData(posts.map(n => ({
+          post: n,
+          user: usersObj[n.userId],
+        })));
+      });
+}, []);
   
   return (
    <Routes>
     <Route path='/*' element={<PageLayout/>}>
-      <Route index element={<HomeComponent posts={posts}/>} />
+      <Route index element={<HomeComponent data={data}/>} />
     </Route>
 
     <Route path='/auth/'>
@@ -35,30 +39,16 @@ function App() {
 
 export default App;
 
-const HomeComponent = ({posts}) => {
+const HomeComponent = ({data}) => {
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '8px', width: '64em', margin: '0 auto', marginTop: '15px'}}>
-      {posts.map((post, index) => <PostComponent postData={post} />)}
-    </div>
-  )
-}
-
-const PostComponent = ({postData}) => {
-  var xhr_U = new XMLHttpRequest()
-  xhr_U.open("GET", "https://jsonplaceholder.typicode.com/users")
-  xhr_U.send()
-  let response_u = JSON.parse(xhr_U.response)
-
-
-  return (
-    <div style = {{
-      border: '1px solid #333',
-      padding: '12px',
-      borderRadius: '8px'
-    }}>
-      <p>{postData.userId === response_u.id}</p>
-      <p>{postData.title}</p>
-      <p>{postData.body}</p>
-    </div>
+      {data.map(({ post, user }) => (
+        <div style = {{border: '1px solid #333', padding: '12px', borderRadius: '8px'}}>
+          <h2>{post.title}</h2>
+          <h3>{user.name}</h3>
+          <p>{post.body}</p>
+        </div>
+      ))}
+    </div> 
   )
 }
