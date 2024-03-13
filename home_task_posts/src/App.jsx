@@ -40,7 +40,7 @@ function App() {
 
 export default App;
 
-const HomeComponent = ({data}, props) => {
+const HomeComponent = ({data}) => {
   {console.log(data)}
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '8px', width: '64em', margin: '0 auto', marginTop: '15px'}}>
