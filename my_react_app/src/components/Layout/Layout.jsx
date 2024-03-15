@@ -1,5 +1,8 @@
 import { Outlet, useNavigate } from "react-router-dom"
 import { Layout, Menu } from 'antd'
+import { useDispatch, useSelector } from "react-redux"
+import { resetCounter, setCounter } from "../../store/reducer/CounterSlice/CounterSlice"
+import { useEffect } from "react"
 
 export const PageLayout = ({}) => {
     const { Header, Footer, Content, Sider } = Layout
@@ -12,6 +15,9 @@ export const PageLayout = ({}) => {
         { id: 4, label: 'Login', key: 4, link:'/auth/login' },
         { id: 5, label: 'Signup', key: 5, link:'/auth/signup' }
     ]
+
+    const dispatch = useDispatch()
+    const { value } = useSelector((state) => state.counterReducer)
 
     const SidebarItems = [
         {label: 'First'},
@@ -28,6 +34,16 @@ export const PageLayout = ({}) => {
         }
     }
 
+    const changeValue = (newValue) => {
+        dispatch(setCounter({value: newValue}))
+    }
+
+    useEffect(() => {
+        return(() => {
+            dispatch(resetCounter())
+        })
+    }, [])
+
     return (
         <Layout>
             <Header style={{display: 'flex', alignItems: 'center'}}>
@@ -39,6 +55,10 @@ export const PageLayout = ({}) => {
                     onClick={({key}) => handleNavigate(key)}
                 />
             </Header>
+            <div style={{padding: '12px'}}>
+                <p> Value: {value} </p>
+                <button onClick={() => changeValue(value+1)}> + </button>   <button onClick={() => changeValue(value-1)}>-</button>
+            </div>
             <Content>
                 <Layout>
                     <Sider theme='light'><Menu items={SidebarItems}/></Sider>

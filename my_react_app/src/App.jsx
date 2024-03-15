@@ -1,3 +1,4 @@
+// import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { PageLayout } from './components/Layout/Layout';
 import { useEffect, useState } from 'react';
@@ -5,6 +6,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
 
+  // const dispatch = useDispatch()
+  // const { value } = useSelector((state) => state.counterReducer)
+  
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
