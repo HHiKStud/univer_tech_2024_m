@@ -1,18 +1,9 @@
-// import React, { useRef } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
-
 import { Layout, Menu } from 'antd'
 
-// import { Header } from "../Header/Header"
-// import { Footer } from "../Footer/Footer"
-
-
-
-export const PageLayout = ({children}) => {
-    // const textareaRef = useRef()
+export const PageLayout = ({}) => {
     const { Header, Footer, Content, Sider } = Layout
     const Navigate = useNavigate()
-
 
     const menuItems = [
         { id: 1, label: 'Main', key: 1, link:'/' },
@@ -60,13 +51,3 @@ export const PageLayout = ({children}) => {
         </Layout>
     )
 }
-
-{/* <div className="layout_container">
-                <Header />
-                <div className="child_container">
-                </div>
-                <Footer />
-            </div> */}
-
-{/* <textarea ref={textareaRef}></textarea>
-                <input type='button' value={'Get text'} onClick={() => {console.log('ref', textareaRef.current.value)}}/> */}
